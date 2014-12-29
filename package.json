@@ -1,6 +1,6 @@
 {
   "name": "config-shield",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Store and retrieve data sensative in nature",
   "main": "./lib/index.js",
   "scripts": {
@@ -10,14 +10,42 @@
     "jshint": "jshint lib/",
     "cli": "node ./scripts/cli.js"
   },
+  "bin": {
+    "config-shield": "./bin/config-shield",
+    "cshield": "./bin/config-shield"
+  },
   "repository": {
     "type": "git",
     "url": "git@github.secureserver.net:PC/node-secure-config.git"
   },
-  "author": "Aaron Silvas",
+  "author": {
+    "name": "Aaron Silvas"
+  },
   "devDependencies": {
     "jscs": "^1.8.1",
     "jshint": "^2.5.11",
     "mocha": "^2.0.1"
-  }
+  },
+  "readmeFilename": "README.md",
+  "gitHead": "ff363e0f7ed1645cc3c6c8c34f69c0eda156a3bf",
+  "_id": "config-shield@0.1.1",
+  "_shasum": "ba87e1ab3753430babe521582d2f2ea854cc68ee",
+  "_from": "config-shield@0.1.1",
+  "_npmVersion": "2.1.14",
+  "_nodeVersion": "0.10.33",
+  "_npmUser": {
+    "name": "wsb",
+    "email": "asilvas@godaddy.com"
+  },
+  "maintainers": [
+    {
+      "name": "wsb",
+      "email": "asilvas@godaddy.com"
+    }
+  ],
+  "dist": {
+    "shasum": "ba87e1ab3753430babe521582d2f2ea854cc68ee",
+    "tarball": "http://172.19.112.179:4873/config-shield/-/config-shield-0.1.1.tgz"
+  },
+  "_resolved": "http://172.19.112.179:4873/config-shield/-/config-shield-0.1.1.tgz"
 }

@@ -23,7 +23,8 @@ var commands = {
 
 function cliMain() {
   rl.resume();
-  cmdLoad([]);
+  rl.write(': config-shield v' + require('../package.json').version + ' ready\r\n');
+  cmdLoad(process.argv[2], process.argv[3]);
 }
 
 cliMain();
@@ -77,10 +78,7 @@ function cmdSet(key, val) {
       objVal = eval('(' + val + ')'); // attempt to parse
     }
   } catch(ex) {
-    // store as string
-    rl.write(': Error: ' + ex);
-
-    enterCommand();
+    // use as existing string
   }
 
   instance.setProp(key, objVal);
@@ -101,40 +99,63 @@ function cmdKeys() {
   enterCommand();
 }
 
-function cmdSave() {
-  rl.question('enter path of config (enter to use secure-config.json)> ', function (configPath) {
+function getConfigPath(configPath, cb) {
+  if (configPath) {
+    return void cb(configPath);
+  }
+  rl.question('enter path of config (enter to use existing path)> ', function(configPath) {
     if (configPath.length === 0) {
-      configPath = './secure-config.json';
+      configPath = instance.configPath;
     }
+    cb(configPath);
+  });
+}
+
+function getPrivateKeyPath(privateKeyPath, cb) {
+  if (privateKeyPath) {
+    return void cb(privateKeyPath);
+  }
+  rl.question('enter path of private key (press enter to use private key path in config)> ', function(privateKeyPath) {
+    if (privateKeyPath.length === 0) {
+      privateKeyPath = null;
+    }
+    cb(privateKeyPath);
+  });
+}
+
+function cmdSave(configPath) {
+  getConfigPath(null, function (configPath) {
     rl.write(': saving... ');
-    instance.save(configPath);
-    rl.write('done');
+    try {
+      instance.save(configPath);
+      rl.write('done');
+    } catch (ex) {
+      rl.write('FAILED: ' + ex.toString());
+    }
 
     enterCommand();
   });
 
 }
 
-function cmdLoad() {
-  rl.question('enter path of config (enter to use secure-config.json)> ', function (configPath) {
-    if (configPath.length === 0) {
-      configPath = './secure-config.json';
-    }
-    rl.question('enter path of private key (press enter to use private key path in config)> ', function (privateKeyPath) {
-      if (privateKeyPath.length === 0) {
-        privateKeyPath = null; // use private key in config by default
-      }
+function cmdLoad(configPath, privateKeyPath) {
+  getConfigPath(configPath, function (configPath) {
+    getPrivateKeyPath(privateKeyPath, function (privateKeyPath) {
       rl.write(': loading...');
-      instance.load({ configPath: configPath, privateKeyPath: privateKeyPath });
-      rl.write('done');
+      try {
+        instance.load({ configPath: configPath, privateKeyPath: privateKeyPath });
+        rl.write('done');
+      } catch (ex) {
+        rl.write('FAILED: ' + ex.toString());
+      }
 
       enterCommand();
     });
   });
 }
 
-function cmdConvert() {
-  rl.question('enter path of new private key> ', function (privateKeyPath) {
+function cmdConvert(privateKeyPath) {
+  getPrivateKeyPath(privateKeyPath, function (privateKeyPath) {
     rl.write(': converting...');
     instance.convert({ privateKeyPath: privateKeyPath });
     rl.write('done. Type `save` to persist to disk');
