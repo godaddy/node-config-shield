@@ -12,11 +12,11 @@ well as optimized for production use.
 ## Making configuration changes
 
 Install `config-shield` in your project:
-
+```
   npm install config-shield --save
-
+```
 Startup the command-line interface from root of application:
-
+```
   npm run config-shield
   : enter path of config (enter to use secure-config.json)>
   : enter path of private key> my.app.key
@@ -34,12 +34,12 @@ Startup the command-line interface from root of application:
   save
   : changes saved
   exit
-
+```
 Optionally you may also install `config-shield` globally:
-
+```
   npm install config-shield -g
   config-shield
-
+```
 
 ## Deploy your config
 
@@ -52,7 +52,7 @@ your project.***
 
 
 ## Loading config from your App
-
+```
   var secureConfig = require('config-shield');
   // one-time load
   secureConfig.load({
@@ -61,14 +61,14 @@ your project.***
   });
 
   var myObj = secureConfig.getProp('my-json-prop');
-
+```
 Access your secure config from anywhere in your app:
-
+```
   var secureConfig = require('config-shield');
   var myObj = secureConfig.getProp('my-json-prop');
-
+```
 Multiple configs? No problem:
-
+```
   var secureConfig = require('config-shield');
   secureConfig.load({
     instance: 'my-other-config',
@@ -78,7 +78,7 @@ Multiple configs? No problem:
 
   var myOtherSecureConfig = secureConfig.instance('my-other-config');
   var myObj = myOtherSecureConfig.getProp('my-prop');
-
+```
 
 
 ## Developer Environment
@@ -91,9 +91,9 @@ to production private keys.
 
 
 ## API
-
+```
   var secureConfig = require('config-shield');
-
+```
 * load (options[, cb]) - Load config.
   * options.instance (default: 'default') - Name of the config instance.
   * options.configPath (required) - Config to load, relative to the current working directory.
