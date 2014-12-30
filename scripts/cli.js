@@ -53,7 +53,7 @@ function onCommand(lineInput) {
     return;
   }
 
-  var partOne = parts[1] || 'null';
+  var partOne = parts[1] || null;
   var partTwo = parts.splice(2).join(' ');
 
   cmd.call(null, partOne, partTwo);
