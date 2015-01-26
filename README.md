@@ -1,5 +1,9 @@
 # Config Shield
 
+[![Build Status](https://travis-ci.org/godaddy/node-config-shield.png)](https://travis-ci.org/godaddy/node-config-shield) [![NPM version](https://badge.fury.io/js/config-shield.png)](http://badge.fury.io/js/config-shield) [![Dependency Status](https://gemnasium.com/godaddy/node-config-shield.png)](https://gemnasium.com/godaddy/node-config-shield) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/godaddy/node-config-shield/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
+[![NPM](https://nodei.co/npm/config-shield.png?downloads=true&stars=true)](https://www.npmjs.org/package/config-shield)
+
 
 ## About
 
