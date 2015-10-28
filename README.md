@@ -129,3 +129,8 @@ to production private keys.
 Possible future enhancements:
 
 * tts - Time to stale before auto-reloading config.
+
+
+## License
+
+[MIT](https://github.com/godaddy/node-config-shield/blob/master/LICENSE.txt)
