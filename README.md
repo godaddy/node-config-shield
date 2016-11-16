@@ -149,7 +149,7 @@ In CLI, would look something like:
   enter path of private key> old.key
   > convert
   enter path of private key> new.key
-  backup (press enter to disable backup)> true
+  backup old values to enable key rotations? (enter to disable, or `true`)> true
   > save
   > exit
 ```
