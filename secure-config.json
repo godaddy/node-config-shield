@@ -1,12 +1,1 @@
-{
-  "_": {
-    "privateKeyPath": "/Users/asilvas/node-config-shield/certs/demo.key"
-  },
-  "properties": {
-    "test": {
-      "alg": "aes-256-ctr",
-      "value": "7a1d53ea4fae63af1a9a8e7528d3e1ea19",
-      "backup": "95a377a9b73e5f96ae4971504ac2509b16"
-    }
-  }
-}
+{}
