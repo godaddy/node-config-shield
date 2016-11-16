@@ -112,9 +112,12 @@ to production private keys.
     otherwise will return synchronously.
 * convert ([options][, cb]) - Convert existing config to new private key.
   * options.privateKeyPath (required) - Private key file to load. Or could be any secret file.
+  * options.backup (default: `false`) - Write old config values as `backup` to allow for a rotationary period where
+    old key will continue to work.
   * options.alg (default: 'aes-256-ctr') - Algorithm to use for encryption.
   * cb (function(err)) - If callback is provided, will save asynchronously,
     otherwise will return synchronously.
+* dropBackup () - Removes all backup keys.
 * getProp (propName) - Return decrypted config value.
 * setProp (propName, propValue) - Store config value.
 * removeProp (propName) - Remove config value.
@@ -122,6 +125,49 @@ to production private keys.
 * getKeys () - Return an array of available property keys.
 * getInstance (instanceName) - Return a config instance.
 * setInstance (instance) - Set a config instance.
+
+
+
+## Rotating keys
+
+In the case you have keys that must be rotated, you can use the convert with `backup` option. The process would
+require you to:
+
+1. Load config with old private key.
+2. Convert with new private key, setting `backup` to `true`.
+3. Deploy your config change.
+4. Rotate your private keys.
+5. Load config with new private key.
+6. Run `dropBackup`.
+7. Deploy your final config change.
+
+In CLI, would look something like:
+
+```
+  config-shield
+  enter path of config> secure-config.json
+  enter path of private key> old.key
+  > convert
+  enter path of private key> new.key
+  backup (press enter to disable backup)> true
+  > save
+  > exit
+```
+
+Deploy your change, then update your config one last time:
+
+```
+  config-shield
+  enter path of config> secure-config.json
+  enter path of private key> new.key
+  > dropBackup
+  > save
+  > exit
+```
+
+Deploy the final config. If you skip the step of dropping the backup, your config will
+become vulnerable to attacks using the old private key, negating most of the value of
+rotating keys.
 
 
 ## Future
