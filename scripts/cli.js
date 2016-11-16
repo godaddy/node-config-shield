@@ -17,6 +17,7 @@ var commands = {
   'save': cmdSave,
   'load': cmdLoad,
   'convert': cmdConvert,
+  'dropBackup': cmdDropBackup,
   'help': cmdHelp,
   'exit': cmdExit
 };
@@ -126,6 +127,18 @@ function getPrivateKeyPath(privateKeyPath, cb) {
   });
 }
 
+function getBackup(backup, cb) {
+  if (typeof backup === 'string' && backup.length > 0) {
+    return void cb(backup);
+  }
+  rl.question('backup old values to enable key rotations? (enter to disable, or `true`)> ', function(backup) {
+    if (backup.length === 0) {
+      backup = 'false';
+    }
+    cb(backup);
+  });
+}
+
 function cmdSave(configPath) {
   getConfigPath(null, function (configPath) {
     rl.write(': saving... ');
@@ -157,14 +170,24 @@ function cmdLoad(configPath, privateKeyPath) {
   });
 }
 
-function cmdConvert(privateKeyPath) {
+function cmdConvert(privateKeyPath, backup) {
   getPrivateKeyPath(privateKeyPath, function (privateKeyPath) {
-    rl.write(': converting...');
-    instance.convert({ privateKeyPath: privateKeyPath });
-    rl.write('done. Type `save` to persist to disk');
+    getBackup(backup, function (backup) {
+      rl.write(': converting...');
+      instance.convert({ privateKeyPath: privateKeyPath, backup: backup === 'true' });
+      rl.write('done. Type `save` to persist to disk');
 
-    enterCommand();
+      enterCommand();
+    });
   });
+}
+
+function cmdDropBackup() {
+  instance.dropBackup();
+
+  rl.write('backups dropped. Type `save` to persist to disk');
+
+  enterCommand();
 }
 
 function cmdExit() {
