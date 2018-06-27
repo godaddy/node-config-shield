@@ -54,10 +54,7 @@ function onCommand(lineInput) {
     return;
   }
 
-  var partOne = parts[1] || null;
-  var partTwo = parts.splice(2).join(' ');
-
-  cmd.call(null, partOne, partTwo);
+  cmd.apply(null, parts.splice(1));
 }
 
 function cmdGet(key) {
@@ -170,11 +167,11 @@ function cmdLoad(configPath, privateKeyPath) {
   });
 }
 
-function cmdConvert(privateKeyPath, backup) {
+function cmdConvert(privateKeyPath, backup, normalizeKey) {
   getPrivateKeyPath(privateKeyPath, function (privateKeyPath) {
     getBackup(backup, function (backup) {
       rl.write(': converting...');
-      instance.convert({ privateKeyPath: privateKeyPath, backup: backup === 'true' });
+      instance.convert({ privateKeyPath: privateKeyPath, backup: backup === 'true', normalizeKey: (normalizeKey === 'true' || instance.config._.normalizeKey) });
       rl.write('done. Type `save` to persist to disk');
 
       enterCommand();

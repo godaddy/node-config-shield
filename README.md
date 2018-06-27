@@ -115,6 +115,7 @@ to production private keys.
   * options.backup (default: `false`) - Write old config values as `backup` to allow for a rotationary period where
     old key will continue to work.
   * options.alg (default: 'aes-256-ctr') - Algorithm to use for encryption.
+  * options.normalizeKey (default: `false` or current normalizeKey) - Removes whitespace from key.
   * cb (function(err)) - If callback is provided, will save asynchronously,
     otherwise will return synchronously.
 * dropBackup () - Removes all backup keys.
