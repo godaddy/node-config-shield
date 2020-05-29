@@ -1,6 +1,6 @@
 {
   "name": "config-shield",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Store and retrieve data sensative in nature",
   "main": "./lib/index.js",
   "scripts": {
