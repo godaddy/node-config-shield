@@ -4,10 +4,8 @@
   "description": "Store and retrieve data sensative in nature",
   "main": "./lib/index.js",
   "scripts": {
-    "test": "npm run jscs && npm run jshint && mocha",
+    "test": "mocha",
     "start": "npm run cli",
-    "jscs": "jscs lib/",
-    "jshint": "jshint lib/",
     "cli": "node ./scripts/cli.js"
   },
   "bin": {
@@ -22,9 +20,7 @@
     "name": "Aaron Silvas"
   },
   "devDependencies": {
-    "jscs": "^2.4.0",
-    "jshint": "^2.8.0",
-    "mocha": "^2.3.3"
+    "mocha": "^7.2.0"
   },
   "readmeFilename": "README.md",
   "gitHead": "ff363e0f7ed1645cc3c6c8c34f69c0eda156a3bf",
