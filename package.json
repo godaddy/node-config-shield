@@ -1,6 +1,6 @@
 {
   "name": "config-shield",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Store and retrieve data sensative in nature",
   "main": "./lib/index.js",
   "scripts": {
@@ -29,5 +29,8 @@
       "name": "asilvas",
       "email": "asilvas@godaddy.com"
     }
-  ]
+  ],
+  "dependencies": {
+    "json5": "^2.1.3"
+  }
 }

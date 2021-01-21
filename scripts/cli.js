@@ -1,4 +1,5 @@
 var readline = require('readline');
+var JSON5 = require('json5');
 
 var rl = readline.createInterface({
   input: process.stdin,
@@ -77,7 +78,7 @@ function cmdSet(key, val) {
   try {
     var strTest = /^[\'\"](.*?)[\'\"]$/.exec(val);
     if (!strTest || strTest.length !== 2) { // do not parse if explicitly a string
-      objVal = eval('(' + val + ')'); // attempt to parse
+      objVal = JSON5.parse(val); // attempt to parse
     } else {
       objVal = strTest[1];
     }
